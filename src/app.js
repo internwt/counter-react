@@ -1,38 +1,62 @@
 console.log("every thing id fine");
 
-let count=0;
-const addone=()=>{
-     count++;
-        recounterapp();
+const app={
+      name:'lovey',
+      options:[]
 };
-const minusone=()=>{
-      count--;
-    recounterapp();
-};
+console.log("gsr");
 
-const reset=()=>{
-  count=0;
+
+const onformsubmit=(e)=>{
+    e.preventDefault();
     
-  recounterapp();
-};
-const objecty = document.getElementById("one");
+    const option=e.target.elements.option.value;
+   
+    if(option){
+        app.options.push(option);
+        e.target.elements.option.value="";
+        renderapp();
+    }
+   
+  
+}
+const Removeall=()=>{
+    app.options=[];
+    renderapp();
 
-const recounterapp=()=>{
-    const templatetwo=(
- <div>
-<h1>count: {count}</h1>
- <button onClick={addone}>+1</button>
- <button onClick={minusone}>-1</button>
- <button onClick={reset}>Reset</button>
- </div>
-
-);
-
-ReactDOM.render(templatetwo, objecty);
 }
 
-     
+const objecty = document.getElementById("one");
 
 
+const renderapp=()=>{
 
-recounterapp();
+const element=(
+ <div>
+    <p>{app.options.length}</p>
+     <ol>
+    {
+    app.options.map((number)=> <li key={number}>{number}</li>
+    )
+
+    }
+    </ol>
+
+<button onClick={Removeall}>remove all</button>
+<button disabled >whashinsfdk</button>
+
+  <form onSubmit={onformsubmit}>
+     <input type="text" name="option" />
+   <button>submit</button>
+
+  </form>
+
+     </div>
+
+);
+ReactDOM.render(element,objecty);
+}
+
+renderapp();
+
+
